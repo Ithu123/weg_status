@@ -1,0 +1,96 @@
+# Die Statusseite fuer das Kollegium — status.werkgymnasium.eu
+#
+# Zweck ist eine einzige Frage: "Liegt der Ausfall an mir oder an allen?"
+# Alles andere ist nachrangig. Die Seite muss vor allem dann noch da sein, wenn
+# nichts anderes mehr geht; deshalb laeuft sie nicht auf unserer Anlage,
+# sondern in GitHub Actions und auf GitHub Pages.
+#
+# GRUNDSATZ BEI JEDEM EINTRAG: Pruefe den Dienst, nicht die Seite davor.
+# Eine Anmeldemaske laedt auch dann noch tadellos, wenn die Datenbank
+# dahinter tot ist. Steht die Ampel dann gruen, sucht das Kollegium den
+# Fehler bei sich — genau das, was die Seite verhindern soll.
+#
+# Die Adressen mit `BITTE-EINTRAGEN.invalid` sind noch Platzhalter. `.invalid`
+# ist eine reservierte Endung und loest garantiert nicht auf: Ein Eintrag, den
+# jemand zu ersetzen vergisst, faellt sofort rot auf, statt stillschweigend
+# gruen zu bleiben.
+
+owner: Ithu123
+repo: weg_status
+
+sites:
+  # --- Eigene Dienste --------------------------------------------------------
+
+  - name: Chat
+    # Der Homeserver selbst, nicht die Element-Oberflaeche. Element ist
+    # statisches JavaScript und laedt auch bei totem Server. `/versions`
+    # antwortet ohne Anmeldung.
+       #
+    # Der Host ist `matrix`, nicht `element`. Massgeblich ist die Delegation
+    # unter https://werkgymnasium.eu/.well-known/matrix/client, und die nennt
+    # `m.homeserver.base_url: https://matrix.werkgymnasium.eu`. Auf
+    # `element.werkgymnasium.eu` antwortet der Pfad mit 404 — dort liegt nur
+    # die Weboberflaeche.
+    url: https://matrix.werkgymnasium.eu/_matrix/client/versions
+
+  - name: Nextcloud von .eu
+    # `status.php` liefert JSON und faellt aus, wenn die Datenbank weg ist.
+    # Die Anmeldeseite taete das nicht.
+    url: https://nextcloud.werkgymnasium.eu/status.php
+
+   - name: Nextcloud von .de
+    # `status.php` liefert JSON und faellt aus, wenn die Datenbank weg ist.
+    # Die Anmeldeseite taete das nicht.
+    url: https://nextcloud.werkgymnasium.de/status.php
+   
+
+  - name: Mail
+    # Ohne IMAP ist das Webmail der Dienst und nicht bloss seine Oberflaeche —
+    # hier also ausnahmsweise richtig so.
+    #
+    # Diese Pruefung bleibt trotzdem flacher als die beiden darueber: Die
+    # Anmeldemaske laedt auch dann, wenn der Mailspeicher dahinter klemmt.
+    # Tiefer ginge es nur ueber einen Endpunkt, der ohne Anmeldung etwas ueber
+    # den Zustand dahinter sagt; welcher das ist, haengt am Produkt. Falls es
+    # spaeter doch IMAP gibt, ist `check: tcp-ping` auf 993 die bessere Pruefung.
+    url: https://mail.werkgymnasium.de
+
+  - name: Vibe
+    url: https://vibe.werkgymnasium.de
+
+  - name: BenotPDF
+    url: https://pdf.werkgymnasium.eu
+
+  # --- Landesdienste ---------------------------------------------------------
+  #
+  # Die kann hier niemand reparieren. Sie stehen trotzdem drauf, weil die Frage
+  # "liegt es an mir?" bei genau diesen am haeufigsten gestellt wird — und weil
+  # ein Blick auf die Seite dann zeigt, dass es nicht die Schule ist.
+  #
+  # Einmal alle fuenf Minuten ein GET auf eine oeffentliche Seite ist hoeflich.
+  # Hier nichts verschaerfen und keine Anmeldeversuche einbauen.
+
+  - name: Moodle
+    url: https://04137819160.moodle.bw.schule/
+
+  - name: bw.schule
+    url: https://bw.schule
+
+status-website:
+  cname: status.werkgymnasium.eu
+  name: Betriebsstatus
+  introTitle: Laeuft es gerade?
+  introMessage: >-
+    Diese Seite wird von ausserhalb der Schule abgefragt und laeuft nicht auf
+    unseren Servern — sie ist also auch dann noch da, wenn die Dienste es nicht
+    sind.
+
+
+    **Steht hier alles auf gruen und es klemmt trotzdem**, liegt es am eigenen
+    Geraet oder an der Leitung. Die Pruefung kommt aus dem Internet; ob das
+    Netz im Haus laeuft, kann sie nicht sehen.
+  navbar:
+    - title: Status
+      href: /
+    - title: Anleitungen
+      href: https://werkgymnasium.eu/
