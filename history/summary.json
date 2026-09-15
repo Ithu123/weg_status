@@ -58,19 +58,19 @@
     "url": "https://mail.werkgymnasium.de",
     "icon": "https://icons.duckduckgo.com/ip3/mail.werkgymnasium.de.ico",
     "slug": "mail",
-    "status": "down",
-    "uptime": "46.13%",
-    "uptimeDay": "46.13%",
-    "uptimeWeek": "46.13%",
-    "uptimeMonth": "46.13%",
-    "uptimeYear": "46.13%",
-    "time": 483,
-    "timeDay": 483,
-    "timeWeek": 483,
-    "timeMonth": 483,
-    "timeYear": 483,
+    "status": "up",
+    "uptime": "0.09%",
+    "uptimeDay": "0.09%",
+    "uptimeWeek": "0.09%",
+    "uptimeMonth": "0.09%",
+    "uptimeYear": "0.09%",
+    "time": 15375,
+    "timeDay": 15375,
+    "timeWeek": 15375,
+    "timeMonth": 15375,
+    "timeYear": 15375,
     "dailyMinutesDown": {
-      "2026-09-15": 0
+      "2026-09-15": 235
     }
   },
   {
