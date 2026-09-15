@@ -49,12 +49,12 @@ grün zu bleiben.
 ## In Betrieb nehmen
 
 1. Öffentliches Repo `weg_status` auf GitHub anlegen, dieses hier pushen.
-2. **Settings → Actions → General → Workflow permissions** auf *Read and write*
+2. **Settings → Actions → General → Workflow permissions** auf _Read and write_
    stellen. Ohne das kann Upptime seine Messwerte nicht committen.
 3. **Settings → Pages** auf den Branch `gh-pages` stellen (entsteht beim ersten
-   Lauf von *Static Site CI*).
+   Lauf von _Static Site CI_).
 4. DNS: `status` als CNAME auf `<benutzer>.github.io`.
-5. Bei Actions *Uptime CI* und *Static Site CI* einmal von Hand auslösen
+5. Bei Actions _Uptime CI_ und _Static Site CI_ einmal von Hand auslösen
    (**Run workflow**), sonst wartet man bis zum nächsten Zeitplan.
 
 ## Was die Seite nicht kann
@@ -72,7 +72,7 @@ Zeitstempel frisch sind.
 
 **Die Prüfung kommt aus dem Internet.** Hängt der Anschluss der Schule, sitzt
 das Kollegium im Haus vor toten Diensten, während hier alles grün steht — die
-Dienste *sind* ja erreichbar, nur nicht von dort. Deshalb steht dieser Fall im
+Dienste _sind_ ja erreichbar, nur nicht von dort. Deshalb steht dieser Fall im
 Vorspann der Seite ausdrücklich drin.
 
 ## Benachrichtigungen
