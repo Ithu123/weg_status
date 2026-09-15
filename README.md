@@ -42,13 +42,13 @@ Prüfer laufen bei GitHub und kommen nur an das, was öffentlich erreichbar ist.
    Schritt. Sobald die Seite steht, leitet Pages die `github.io`-Adresse
    dauerhaft auf die eigene Domain um; zeigt die noch woandershin, ist die
    Seite unter beiden Adressen unerreichbar.
-4. Bei Actions **Uptime CI** von Hand auslösen (*Run workflow*), danach
+4. Bei Actions **Uptime CI** von Hand auslösen (_Run workflow_), danach
    **Static Site CI**. Die Reihenfolge zählt: Die Seite braucht die Messwerte
    aus dem ersten Lauf. Erst dabei entsteht der Branch `gh-pages`.
 5. **Settings → Pages** auf Branch `gh-pages`, Verzeichnis `/ (root)`. Vorher
    steht der Branch nicht zur Auswahl — das ist kein Fehler.
 
-*Setup CI* ist dafür **nicht** nötig. Der Workflow stößt die anderen nur an und
+_Setup CI_ ist dafür **nicht** nötig. Der Workflow stößt die anderen nur an und
 beginnt mit dem Vorlagen-Abgleich, der hier abgeschaltet ist (siehe unten). Die
 beiden Läufe oben von Hand auszulösen führt zum selben Ergebnis.
 
@@ -98,7 +98,7 @@ refusing to allow a GitHub App to create or update workflow
 `.github/workflows/response-time.yml` without `workflows` permission
 ```
 
-Und weil er in *Setup CI* der erste Schritt ist, riss er alles Folgende mit —
+Und weil er in _Setup CI_ der erste Schritt ist, riss er alles Folgende mit —
 auch den Bau der Seite.
 
 Der dokumentierte Ausweg wäre ein Personal Access Token mit
