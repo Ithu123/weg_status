@@ -33,29 +33,24 @@ Wer etwas Internes überwachen will, braucht dafür ein anderes Werkzeug auf
 eigener Hardware (Gatus, Uptime Kuma). Upptime kann es ohnehin nicht: Seine
 Prüfer laufen bei GitHub und kommen nur an das, was öffentlich erreichbar ist.
 
-## Noch zu tun
-
-In [`.upptimerc.yml`](.upptimerc.yml) stehen noch fünf Platzhalter — Dateien, Mail,
-Vibe, BenotPDF und Moodle:
-
-```bash
-grep -n BITTE-EINTRAGEN .upptimerc.yml
-```
-
-`.invalid` ist eine reservierte Endung und löst garantiert nicht auf. Ein
-vergessener Platzhalter fällt deshalb sofort rot auf, statt stillschweigend
-grün zu bleiben.
-
 ## In Betrieb nehmen
 
 1. Öffentliches Repo `weg_status` auf GitHub anlegen, dieses hier pushen.
 2. **Settings → Actions → General → Workflow permissions** auf _Read and write_
    stellen. Ohne das kann Upptime seine Messwerte nicht committen.
-3. **Settings → Pages** auf den Branch `gh-pages` stellen (entsteht beim ersten
-   Lauf von _Static Site CI_).
-4. DNS: `status` als CNAME auf `<benutzer>.github.io`.
-5. Bei Actions _Uptime CI_ und _Static Site CI_ einmal von Hand auslösen
-   (**Run workflow**), sonst wartet man bis zum nächsten Zeitplan.
+3. DNS: `status` als CNAME auf `<benutzer>.github.io` — **vor** dem nächsten
+   Schritt. Sobald die Seite steht, leitet Pages die `github.io`-Adresse
+   dauerhaft auf die eigene Domain um; zeigt die noch woandershin, ist die
+   Seite unter beiden Adressen unerreichbar.
+4. Bei Actions **Uptime CI** von Hand auslösen (*Run workflow*), danach
+   **Static Site CI**. Die Reihenfolge zählt: Die Seite braucht die Messwerte
+   aus dem ersten Lauf. Erst dabei entsteht der Branch `gh-pages`.
+5. **Settings → Pages** auf Branch `gh-pages`, Verzeichnis `/ (root)`. Vorher
+   steht der Branch nicht zur Auswahl — das ist kein Fehler.
+
+*Setup CI* ist dafür **nicht** nötig. Der Workflow stößt die anderen nur an und
+beginnt mit dem Vorlagen-Abgleich, der hier abgeschaltet ist (siehe unten). Die
+beiden Läufe oben von Hand auszulösen führt zum selben Ergebnis.
 
 ## Was die Seite nicht kann
 
@@ -83,8 +78,51 @@ GitHub-Issue an. Für den Anfang reicht das.
 
 ## Änderungen
 
-Nur [`.upptimerc.yml`](.upptimerc.yml) anfassen. Die Dateien unter
-`.github/workflows/` werden aus der Vorlage erzeugt und wöchentlich
-überschrieben — Änderungen daran sind beim nächsten Abgleich weg.
+Im Normalfall nur [`.upptimerc.yml`](.upptimerc.yml) anfassen. Die
+Verzeichnisse `api/`, `graphs/` und `history/` legt Upptime selbst an.
 
-Die Verzeichnisse `api/`, `graphs/` und `history/` legt Upptime selbst an.
+## Der Vorlagen-Abgleich ist abgeschaltet
+
+In [`.templaterc.json`](.templaterc.json) steht eine leere Dateiliste. Damit
+holt Upptime **keine Änderungen mehr aus der Vorlage**, und die Dateien unter
+`.github/workflows/` bleiben so, wie sie hier liegen.
+
+Das ist Absicht, und der Grund ist eine harte Grenze von GitHub: Der
+eingebaute `GITHUB_TOKEN` **darf Dateien unter `.github/workflows/`
+grundsätzlich nicht schreiben** — die Berechtigung `workflows` gibt es für ihn
+nicht, damit ein kompromittierter Workflow sich nicht selbst umschreiben kann.
+Der Abgleich scheiterte deshalb zuverlässig mit:
+
+```
+refusing to allow a GitHub App to create or update workflow
+`.github/workflows/response-time.yml` without `workflows` permission
+```
+
+Und weil er in *Setup CI* der erste Schritt ist, riss er alles Folgende mit —
+auch den Bau der Seite.
+
+Der dokumentierte Ausweg wäre ein Personal Access Token mit
+`workflows: write` als Secret `GH_PAT`. Dagegen sprach die Ablaufzeit:
+Fine-grained Tokens gelten höchstens ein Jahr, und wenn einer ausläuft, hört
+die Statusseite **still** auf sich zu aktualisieren. Das ist genau der
+Fehlerfall, der weiter oben als „schlimmer als gar keine Seite" steht — für
+den Gegenwert einer automatischen Vorlagenpflege zu teuer.
+
+Laut Upptimes Maintainer ist das auch der einzige Teil, der den Token braucht:
+
+> All functionality works perfectly fine when using the GitHub token. The only
+> real reason the PAT is necessary is because of the template update action.
+
+**Was das im Alltag bedeutet:** Bei einer neuen Upptime-Version die Workflows
+von Hand nachziehen. Der aktuelle Stand ist **v1.44.0**.
+
+```bash
+git remote add vorlage https://github.com/upptime/upptime.git   # einmalig
+git fetch vorlage
+git checkout vorlage/master -- .github/
+git diff --cached                                              # ansehen!
+```
+
+Der Blick auf den Diff ist nicht optional: Die Workflows erzeugt Upptime aus
+`.upptimerc.yml`, und was von dort kommt, läuft danach mit den Rechten dieses
+Repos. Ein- oder zweimal im Jahr reicht dafür völlig.

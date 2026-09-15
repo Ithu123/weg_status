@@ -9,11 +9,6 @@
 # Eine Anmeldemaske laedt auch dann noch tadellos, wenn die Datenbank
 # dahinter tot ist. Steht die Ampel dann gruen, sucht das Kollegium den
 # Fehler bei sich — genau das, was die Seite verhindern soll.
-#
-# Die Adressen mit `BITTE-EINTRAGEN.invalid` sind noch Platzhalter. `.invalid`
-# ist eine reservierte Endung und loest garantiert nicht auf: Ein Eintrag, den
-# jemand zu ersetzen vergisst, faellt sofort rot auf, statt stillschweigend
-# gruen zu bleiben.
 
 owner: Ithu123
 repo: weg_status
