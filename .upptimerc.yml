@@ -25,7 +25,7 @@ sites:
     # Der Homeserver selbst, nicht die Element-Oberflaeche. Element ist
     # statisches JavaScript und laedt auch bei totem Server. `/versions`
     # antwortet ohne Anmeldung.
-       #
+    #
     # Der Host ist `matrix`, nicht `element`. Massgeblich ist die Delegation
     # unter https://werkgymnasium.eu/.well-known/matrix/client, und die nennt
     # `m.homeserver.base_url: https://matrix.werkgymnasium.eu`. Auf
@@ -33,16 +33,16 @@ sites:
     # die Weboberflaeche.
     url: https://matrix.werkgymnasium.eu/_matrix/client/versions
 
-  - name: Nextcloud von .eu
+  - name: Nextcloud werkgymnasium.eu
     # `status.php` liefert JSON und faellt aus, wenn die Datenbank weg ist.
     # Die Anmeldeseite taete das nicht.
     url: https://nextcloud.werkgymnasium.eu/status.php
 
-   - name: Nextcloud von .de
+  - name: Nextcloud werkgymnasium.de
     # `status.php` liefert JSON und faellt aus, wenn die Datenbank weg ist.
     # Die Anmeldeseite taete das nicht.
     url: https://nextcloud.werkgymnasium.de/status.php
-   
+
 
   - name: Mail
     # Ohne IMAP ist das Webmail der Dienst und nicht bloss seine Oberflaeche —
@@ -71,7 +71,14 @@ sites:
   # Hier nichts verschaerfen und keine Anmeldeversuche einbauen.
 
   - name: Moodle
-    url: https://04137819160.moodle.bw.schule/
+    # `?noredirect=1` ist wichtig. Ohne den Parameter leitet Moodle sofort zur
+    # Anmeldung bei bw.schule weiter — der Monitor pruefte dann das Landes-SSO
+    # statt Moodle, waere doppelt zum Eintrag darunter und wuerde alle fuenf
+    # Minuten eine OAuth-Anfrage beim Land ausloesen.
+    #
+    # Mit dem Parameter rendert Moodle seine eigene Anmeldeseite: eigener Host,
+    # eigenes PHP, eigene Datenbank, HTTP 200 ohne Umleitung.
+    url: https://04137819160.moodle.bw.schule/login/index.php?noredirect=1
 
   - name: bw.schule
     url: https://bw.schule
