@@ -70,7 +70,7 @@
     "timeMonth": 5989,
     "timeYear": 5989,
     "dailyMinutesDown": {
-      "2026-09-19": 148,
+      "2026-09-19": 309,
       "2026-09-18": 1440,
       "2026-09-17": 1440,
       "2026-09-16": 1440,
@@ -136,19 +136,19 @@
     "url": "https://bw.schule",
     "icon": "https://icons.duckduckgo.com/ip3/bw.schule.ico",
     "slug": "bw-schule",
-    "status": "down",
-    "uptime": "97.99%",
-    "uptimeDay": "92.62%",
-    "uptimeWeek": "97.99%",
-    "uptimeMonth": "97.99%",
-    "uptimeYear": "97.99%",
-    "time": 13027,
-    "timeDay": 31795,
-    "timeWeek": 13027,
-    "timeMonth": 13027,
-    "timeYear": 13027,
+    "status": "up",
+    "uptime": "95.08%",
+    "uptimeDay": "81.43%",
+    "uptimeWeek": "95.08%",
+    "uptimeMonth": "95.08%",
+    "uptimeYear": "95.08%",
+    "time": 11698,
+    "timeDay": 22438,
+    "timeWeek": 11698,
+    "timeMonth": 11698,
+    "timeYear": 11698,
     "dailyMinutesDown": {
-      "2026-09-19": 106
+      "2026-09-19": 267
     }
   }
 ]
