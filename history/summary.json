@@ -59,18 +59,19 @@
     "icon": "https://icons.duckduckgo.com/ip3/mail.werkgymnasium.de.ico",
     "slug": "mail",
     "status": "up",
-    "uptime": "0.01%",
+    "uptime": "0.00%",
     "uptimeDay": "0.00%",
-    "uptimeWeek": "0.01%",
-    "uptimeMonth": "0.01%",
-    "uptimeYear": "0.01%",
+    "uptimeWeek": "0.00%",
+    "uptimeMonth": "0.00%",
+    "uptimeYear": "0.00%",
     "time": 6489,
     "timeDay": 444,
     "timeWeek": 6489,
     "timeMonth": 6489,
     "timeYear": 6489,
     "dailyMinutesDown": {
-      "2026-09-18": 148,
+      "2026-09-19": 42,
+      "2026-09-18": 1440,
       "2026-09-17": 1440,
       "2026-09-16": 1440,
       "2026-09-15": 810
@@ -135,17 +136,19 @@
     "url": "https://bw.schule",
     "icon": "https://icons.duckduckgo.com/ip3/bw.schule.ico",
     "slug": "bw-schule",
-    "status": "up",
+    "status": "down",
     "uptime": "100.00%",
-    "uptimeDay": "100.00%",
+    "uptimeDay": "99.99%",
     "uptimeWeek": "100.00%",
     "uptimeMonth": "100.00%",
     "uptimeYear": "100.00%",
-    "time": 3644,
-    "timeDay": 2474,
-    "timeWeek": 3644,
-    "timeMonth": 3644,
-    "timeYear": 3644,
-    "dailyMinutesDown": {}
+    "time": 9258,
+    "timeDay": 17095,
+    "timeWeek": 9258,
+    "timeMonth": 9258,
+    "timeYear": 9258,
+    "dailyMinutesDown": {
+      "2026-09-19": 0
+    }
   }
 ]
